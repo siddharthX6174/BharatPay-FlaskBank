@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
+    <div class="max-w-md w-full px-4">
+        <!-- Success Card -->
+        <div
+            class="bg-white rounded-[3rem] shadow-2xl shadow-emerald-900/10 border border-emerald-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+            <!-- Success Header -->
+            <div class="bg-emerald-600 py-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-emerald-500 opacity-20 blur-3xl rounded-full -top-1/2 -left-1/2"></div>
+                <div class="absolute inset-0 bg-emerald-700 opacity-20 blur-3xl rounded-full -bottom-1/2 -right-1/2">
+                </div>
+
+                <div class="relative z-10">
+                    <div
+                        class="w-20 h-20 mx-auto bg-white/20 backdrop-blur-md border border-white/30 rounded-3xl flex items-center justify-center mb-6 shadow-xl">
+                        <i class="fas fa-check text-white text-4xl"></i>
+                    </div>
+                    <h1 class="text-3xl font-black text-white tracking-tight">Protocol Verified</h1>
+                    <p class="text-emerald-100/80 font-bold uppercase tracking-[0.2em] text-[10px] mt-2">Transaction
+                        Committed</p>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-10 text-center">
+                <p class="text-gray-500 font-medium mb-10 leading-relaxed">Your financial vector has been successfully
+                    transmitted and verified by the network.</p>
+
+                <!-- Action Buttons -->
+                <div class="space-y-4">
+                    <!-- Download Button -->
+                    <a href="{{ url_for('download_reciept', filename=filename) }}"
+                        class="flex items-center justify-center w-full px-8 py-5 bg-gray-900 text-white font-black rounded-2xl hover:bg-emerald-600 transition-all shadow-xl shadow-gray-900/10 active:scale-95 uppercase tracking-widest text-xs">
+                        <i class="fas fa-file-invoice mr-3"></i>
+                        Extract Receipt
+                    </a>
+
+                    <!-- Back to Dashboard -->
+                    <a href="{{ url_for('dashboard') }}"
+                        class="flex items-center justify-center w-full px-8 py-5 bg-emerald-50 text-emerald-600 font-black rounded-2xl hover:bg-emerald-100 transition-all border border-emerald-100 uppercase tracking-widest text-xs">
+                        <i class="fas fa-th-large mr-3 text-xs"></i>
+                        Return to Node
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Text -->
+        <div class="mt-8 flex flex-col items-center space-y-2 opacity-60">
+            <p class="text-center text-gray-400 text-[10px] font-black uppercase tracking-widest">
+                Ledger Entry ID: {{ filename.split('_')[0] if filename else 'SEC-AUTH-00' }}
+            </p>
+            <div class="flex items-center space-x-2 text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+                <i class="fas fa-shield-alt"></i>
+                <span>Cryptographically Secure</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

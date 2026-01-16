@@ -1,0 +1,123 @@
+<!-- Sidebar Partial -->
+<aside id="sidebar"
+    class="sidebar fixed left-0 top-0 h-screen w-72 bg-white border-r border-slate-100 z-40 flex flex-col transition-all duration-300">
+    <!-- Logo Section -->
+    <div class="p-8 pb-10">
+        <a href="{{ url_for('admin_dashboard') }}" class="flex items-center space-x-4 group">
+            <div
+                class="w-12 h-12 bg-[#10B981] rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 transform group-hover:rotate-3 transition-transform">
+                <img src="{{ url_for('static', filename='assets/images/bank-logo.svg') }}" alt="BHARAT PAY"
+                    class="w-7 h-7 invert brightness-0">
+            </div>
+            <div>
+                <h1 class="text-xl font-black tracking-tighter leading-none">
+                    <span class="text-slate-900">BHARAT</span><span class="text-[#10B981]">PAY</span>
+                </h1>
+                <p class="text-[9px] font-black uppercase tracking-[0.2em] text-slate-900 mt-1">Admin Panel</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-grow px-4 space-y-2 overflow-y-auto pt-4">
+        <!-- Overview -->
+        <a href="{{ url_for('admin_dashboard') }}" class="flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group
+           {% if request.endpoint == 'admin_dashboard' %}
+           bg-[#F0FDF4] text-[#10B981] relative overflow-hidden
+           {% else %}
+           text-slate-500 hover:bg-slate-50 hover:text-slate-900
+           {% endif %}">
+            <div class="flex items-center space-x-4">
+                <i
+                    class="fas fa-th-large text-lg w-6 flex justify-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-sm tracking-tight">Overview</span>
+            </div>
+            {% if request.endpoint == 'admin_dashboard' %}
+            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-[#10B981] rounded-l-full"></div>
+            {% endif %}
+        </a>
+
+        <!-- Citizens -->
+        <a href="{{ url_for('admin_users') }}" class="flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group
+           {% if request.endpoint == 'admin_users' %}
+           bg-[#F0FDF4] text-[#10B981] relative overflow-hidden
+           {% else %}
+           text-slate-500 hover:bg-slate-50 hover:text-slate-900
+           {% endif %}">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-users text-lg w-6 flex justify-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-sm tracking-tight">Manage Users</span>
+            </div>
+            {% if request.endpoint == 'admin_users' %}
+            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-[#10B981] rounded-l-full"></div>
+            {% endif %}
+        </a>
+
+        <!-- Identity Vault -->
+        <a href="{{ url_for('admin_profile_changes') }}" class="flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group
+           {% if request.endpoint == 'admin_profile_changes' %}
+           bg-[#F0FDF4] text-[#10B981] relative overflow-hidden
+           {% else %}
+           text-slate-500 hover:bg-slate-50 hover:text-slate-900
+           {% endif %}">
+            <div class="flex items-center space-x-4">
+                <i
+                    class="fas fa-user-edit text-lg w-6 flex justify-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-sm tracking-tight">Profile Changes</span>
+            </div>
+            {% if request.endpoint == 'admin_profile_changes' %}
+            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-[#10B981] rounded-l-full"></div>
+            {% endif %}
+        </a>
+
+        <!-- Ledger Stream -->
+        <a href="{{ url_for('admin_transactions') }}" class="flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group
+           {% if request.endpoint == 'admin_transactions' %}
+           bg-[#F0FDF4] text-[#10B981] relative overflow-hidden
+           {% else %}
+           text-slate-500 hover:bg-slate-50 hover:text-slate-900
+           {% endif %}">
+            <div class="flex items-center space-x-4">
+                <i
+                    class="fas fa-exchange-alt text-lg w-6 flex justify-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-sm tracking-tight">Transactions</span>
+            </div>
+            {% if request.endpoint == 'admin_transactions' %}
+            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-[#10B981] rounded-l-full"></div>
+            {% endif %}
+        </a>
+
+        <!-- Configuration -->
+        <a href="{{ url_for('admin_settings') }}" class="flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group
+           {% if request.endpoint == 'admin_settings' %}
+           bg-[#F0FDF4] text-[#10B981] relative overflow-hidden
+           {% else %}
+           text-slate-500 hover:bg-slate-50 hover:text-slate-900
+           {% endif %}">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-cog text-lg w-6 flex justify-center group-hover:scale-110 transition-transform"></i>
+                <span class="font-bold text-sm tracking-tight">Settings</span>
+            </div>
+            {% if request.endpoint == 'admin_settings' %}
+            <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-[#10B981] rounded-l-full"></div>
+            {% endif %}
+        </a>
+
+        <!-- System Section -->
+        <div class="pt-10 pb-4 px-8">
+            <p class="text-[10px] font-black text-slate-900 uppercase tracking-[0.4em]">System</p>
+        </div>
+
+        <!-- Logout -->
+        <a href="{{ url_for('logout') }}"
+            class="flex items-center space-x-4 px-6 py-4 rounded-2xl text-red-500 hover:bg-red-50 transition-all duration-300 group">
+            <i class="fas fa-power-off text-lg w-6 flex justify-center group-hover:rotate-12 transition-transform"></i>
+            <span class="font-bold text-sm tracking-tight">Logout</span>
+        </a>
+    </nav>
+
+    <!-- Branding Footer -->
+    <div class="p-8 mt-auto border-t border-slate-50">
+        <p class="text-[10px] font-bold text-slate-900 text-center uppercase tracking-widest">Version 1.0.4</p>
+    </div>
+</aside>

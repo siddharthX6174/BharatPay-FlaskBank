@@ -1,0 +1,53 @@
+# Virtual environments
+flaskenv/
+venv/
+.env/
+.venv/
+myenv/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*
+
+# Bytecode, logs and DB files
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+*.db
+
+# Distribution/build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing
+.pytest_cache/
+coverage.xml
+htmlcov/
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Keep example env in repo, but ignore real envs
+!.env.example

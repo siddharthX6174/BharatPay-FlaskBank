@@ -1,0 +1,52 @@
+<div class="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
+    <div class="max-w-md w-full px-4 sm:px-6 lg:px-8">
+
+        <!-- Success Card -->
+        <div
+            class="bg-white rounded-[3rem] shadow-2xl shadow-emerald-900/10 border border-emerald-100 p-10 text-center transform hover:scale-[1.02] transition-transform duration-500">
+
+            <!-- Success Icon -->
+            <div
+                class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-inner">
+                <i class="fas fa-check text-3xl"></i>
+            </div>
+
+            <h1 class="text-3xl font-black text-gray-900 tracking-tight mb-2">Signal Refilled</h1>
+            <p class="text-gray-500 font-medium mb-10">Module acquisition protocol completed successfully</p>
+
+            <!-- Amount Details -->
+            <div class="bg-gray-50 rounded-3xl p-6 mb-10 border border-gray-100/50">
+                <div class="flex justify-between items-center py-3 border-b border-gray-200/50">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Base Allocation</span>
+                    <span class="font-black text-gray-900 text-lg">₹ {{ amount }}</span>
+                </div>
+                <div class="flex justify-between items-center py-3">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Protocol Rebate
+                        (10%)</span>
+                    <span class="font-black text-emerald-600 text-lg">- ₹ {{ discount }}</span>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <a href="{{ url_for('dashboard') }}"
+                class="flex items-center justify-center w-full px-8 py-5 bg-gray-900 text-white font-black rounded-2xl hover:bg-emerald-600 transition-all shadow-xl shadow-gray-900/10 active:scale-95 uppercase tracking-widest text-xs">
+                <i class="fas fa-th-large mr-3 text-xs"></i>
+                Return to Node
+            </a>
+        </div>
+
+        <!-- Meta Footer -->
+        <div class="mt-8 flex items-center justify-center space-x-6">
+            <div class="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                <i class="fas fa-shield-alt text-emerald-500 mr-2"></i>
+                Authorized
+            </div>
+            <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
+            <div class="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                <i class="fas fa-bolt text-emerald-500 mr-2"></i>
+                Instant
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

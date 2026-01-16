@@ -1,0 +1,248 @@
+{% extends 'admin/default.html' %}
+
+{% block page_title %}User Management{% endblock %}
+{% block page_subtitle %}View and manage all registered users{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Search & Filters Command Bar -->
+    <div class="bg-white rounded-[2rem] premium-shadow border border-slate-50 p-6 lg:p-8">
+        <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="group">
+                <label
+                    class="block text-[10px] font-black text-slate-900 uppercase tracking-[0.3em] mb-3 ml-2 group-focus-within:text-emerald-500 transition-colors">User
+                    Status</label>
+                <div class="relative">
+                    <select name="status"
+                        class="w-full pl-6 pr-10 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none appearance-none cursor-pointer">
+                        <option value="all" {% if status_filter=='all' %}selected{% endif %}>All Users</option>
+                        <option value="pending" {% if status_filter=='pending' %}selected{% endif %}>Pending Only
+                        </option>
+                        <option value="approved" {% if status_filter=='approved' %}selected{% endif %}>Approved Only
+                        </option>
+                        <option value="rejected" {% if status_filter=='rejected' %}selected{% endif %}>Rejected Only
+                        </option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-2 group">
+                <label
+                    class="block text-[10px] font-black text-slate-900 uppercase tracking-[0.3em] mb-3 ml-2 group-focus-within:text-emerald-500 transition-colors">Quick
+                    Search</label>
+                <div class="relative">
+                    <div
+                        class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <input type="text" name="search" value="{{ search_query }}"
+                        placeholder="Search by name, account or card..."
+                        class="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-slate-900 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-300">
+                </div>
+            </div>
+            <div class="flex items-end">
+                <button type="submit"
+                    class="w-full py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-emerald-600 transition-all transform hover:-translate-y-1 shadow-lg shadow-slate-200">
+                    Filter Users
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Registry Table -->
+    <div class="bg-white rounded-[2.5rem] premium-shadow border border-slate-50 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-slate-50 border-b border-slate-100">
+                    <tr>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-900 uppercase tracking-[0.3em]">
+                            User</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-900 uppercase tracking-[0.3em]">
+                            Account Number</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hidden xl:table-cell">
+                            Card Number</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-900 uppercase tracking-[0.3em]">
+                            Balance</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hidden md:table-cell">
+                            Status</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hidden lg:table-cell">
+                            Joined</th>
+                        <th
+                            class="px-8 py-6 text-left text-[10px] font-black text-slate-900 uppercase tracking-[0.3em]">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50">
+                    {% for user in users %}
+                    <tr class="hover:bg-slate-50/50 transition-all duration-300 group" id="user-{{ user.id }}">
+                        <td class="px-8 py-6">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center shadow-sm border border-slate-200 group-hover:rotate-6 transition-transform">
+                                    <span class="text-sm font-black text-slate-900 italic">{{ user.full_name[0].upper()
+                                        }}</span>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="font-black text-slate-900 text-sm italic tracking-tight truncate">{{
+                                        user.full_name }}</p>
+                                    <p class="text-[10px] font-medium text-slate-400 truncate">{{ user.email }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-8 py-6">
+                            {% if user.account_number %}
+                            <span class="text-[11px] font-black text-slate-900 font-mono tracking-widest">{{
+                                user.account_number }}</span>
+                            {% else %}
+                            <span
+                                class="text-[10px] font-black text-slate-200 uppercase tracking-widest italic">None</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-8 py-6 hidden xl:table-cell">
+                            {% if user.card_number %}
+                            <span class="text-[11px] font-black text-slate-500 font-mono tracking-widest">{{
+                                user.card_number }}</span>
+                            {% else %}
+                            <span
+                                class="text-[10px] font-black text-slate-200 uppercase tracking-widest italic">None</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-8 py-6">
+                            <span class="text-sm font-black text-slate-900 italic tracking-tighter">Rs {{
+                                "{:,.0f}".format(user.balance) }}</span>
+                        </td>
+                        <td class="px-8 py-6 hidden md:table-cell">
+                            <span class="px-3 py-1 text-[9px] font-black rounded-lg uppercase tracking-widest border
+                                {% if user.status == 'approved' %}border-emerald-100 bg-emerald-50 text-emerald-600
+                                {% elif user.status == 'pending' %}border-amber-100 bg-amber-50 text-amber-600
+                                {% elif user.status == 'rejected' %}border-red-100 bg-red-50 text-red-600
+                                {% endif %}">
+                                {{ user.status }}
+                            </span>
+                        </td>
+                        <td class="px-8 py-6 hidden lg:table-cell">
+                            <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">{{
+                                user.created_at.strftime('%d %b %Y') }}</span>
+                        </td>
+                        <td class="px-8 py-6">
+                            <div class="flex gap-2">
+                                {% if user.status == 'pending' %}
+                                <button data-action="approve" data-user-id="{{ user.id }}"
+                                    class="w-9 h-9 bg-white text-emerald-500 rounded-lg hover:bg-emerald-500 hover:text-white transition-all shadow-sm border border-slate-100 flex items-center justify-center text-xs">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button data-action="reject" data-user-id="{{ user.id }}"
+                                    class="w-9 h-9 bg-white text-red-400 rounded-lg hover:bg-red-500 hover:text-white transition-all shadow-sm border border-slate-100 flex items-center justify-center text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                {% endif %}
+                                <button data-action="delete" data-user-id="{{ user.id }}"
+                                    data-user-name="{{ user.full_name }}"
+                                    class="w-9 h-9 bg-white text-slate-400 rounded-lg hover:bg-slate-900 hover:text-white transition-all shadow-sm border border-slate-100 flex items-center justify-center text-xs">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not users %}
+        <div class="text-center py-24 bg-white">
+            <div
+                class="w-16 h-16 bg-slate-50 text-slate-200 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-100">
+                <i class="fas fa-users text-2xl"></i>
+            </div>
+            <h4 class="text-slate-900 font-black italic uppercase text-lg mb-1">No Users Found</h4>
+            <p class="text-slate-400 text-[10px] font-black uppercase tracking-widest">No users match your current
+                filter</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+    // Event delegation
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+
+        const action = btn.dataset.action;
+        const userId = btn.dataset.userId;
+        const userName = btn.dataset.userName;
+
+        if (action === 'approve') {
+            approveUser(userId);
+        } else if (action === 'reject') {
+            rejectUser(userId);
+        } else if (action === 'delete') {
+            deleteUser(userId, userName);
+        }
+    });
+
+    function approveUser(userId) {
+        if (confirm('Approve this user?')) {
+            fetch('/admin/user/' + userId + '/approve', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) location.reload();
+                    else alert('PROTOCOL ERROR: ' + data.message);
+                });
+        }
+    }
+
+    function rejectUser(userId) {
+        if (confirm('Reject this registration?')) {
+            fetch('/admin/user/' + userId + '/reject', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) location.reload();
+                    else alert('PROTOCOL ERROR: ' + data.message);
+                });
+        }
+    }
+
+    function deleteUser(userId, userName) {
+        if (confirm('Delete user "' + userName + '"? This action cannot be undone.')) {
+            fetch('/admin/user/' + userId + '/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) location.reload();
+                    else alert('PROTOCOL ERROR: ' + data.message);
+                });
+        }
+    }
+</script>
+{% endblock %}

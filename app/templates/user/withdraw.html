@@ -1,0 +1,176 @@
+{% extends 'user/default.html' %}
+
+{% block title %}
+Withdraw | Bharat Pay
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-[#F8F9FA] pt-6">
+    <div class="w-full px-8 lg:px-12 xl:px-16 py-8">
+        <!-- Back Button -->
+        <div class="mb-8">
+            <a href="{{ url_for('dashboard') }}"
+                class="group inline-flex items-center text-emerald-600 hover:text-emerald-700 font-semibold transition-colors">
+                <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+                Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Withdraw Funds</h1>
+            <p class="text-gray-500 mt-2">Securely withdraw money from your account</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Withdrawal Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                    <form method="POST" action="{{ url_for('withdraw') }}" class="space-y-6">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                        <!-- Amount Input -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                Amount (Rs)
+                            </label>
+                            <div class="relative">
+                                <div
+                                    class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-emerald-600 font-bold text-lg">
+                                    ₹
+                                </div>
+                                <input type="number" name="amount" step="0.01" min="100" placeholder="0.00" required
+                                    class="w-full pl-10 pr-4 py-4 text-2xl font-bold bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:bg-white focus:border-emerald-500 transition-all outline-none">
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">Minimum withdrawal: Rs 100.00</p>
+                        </div>
+
+                        <!-- ATM Location -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                ATM / Branch Location (Optional)
+                            </label>
+                            <div class="relative">
+                                <div
+                                    class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <input type="text" name="atm_location" placeholder="e.g., Main Street ATM"
+                                    class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:bg-white focus:border-emerald-500 transition-all outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Quick Amount Buttons -->
+                        <div>
+                            <p class="text-sm font-semibold text-gray-700 mb-3">Quick Select</p>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="quickAmounts">
+                                <button type="button"
+                                    class="quick-amount-btn px-4 py-3 bg-gray-50 hover:bg-emerald-600 border border-gray-200 text-gray-700 hover:text-white rounded-xl font-bold transition-all"
+                                    data-amount="500">
+                                    ₹500
+                                </button>
+                                <button type="button"
+                                    class="quick-amount-btn px-4 py-3 bg-gray-50 hover:bg-emerald-600 border border-gray-200 text-gray-700 hover:text-white rounded-xl font-bold transition-all"
+                                    data-amount="1000">
+                                    ₹1,000
+                                </button>
+                                <button type="button"
+                                    class="quick-amount-btn px-4 py-3 bg-gray-50 hover:bg-emerald-600 border border-gray-200 text-gray-700 hover:text-white rounded-xl font-bold transition-all"
+                                    data-amount="2000">
+                                    ₹2,000
+                                </button>
+                                <button type="button"
+                                    class="quick-amount-btn px-4 py-3 bg-gray-50 hover:bg-emerald-600 border border-gray-200 text-gray-700 hover:text-white rounded-xl font-bold transition-all"
+                                    data-amount="5000">
+                                    ₹5,000
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button type="submit"
+                                class="flex-1 px-6 py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20">
+                                <i class="fas fa-wallet mr-2"></i> Withdraw
+                            </button>
+                            <a href="{{ url_for('dashboard') }}"
+                                class="px-6 py-4 bg-gray-100 text-gray-600 font-semibold rounded-xl hover:bg-gray-200 transition-all text-center">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Balance Card -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 text-white">
+                    <p class="text-slate-400 text-sm font-medium mb-2">Available Balance</p>
+                    <p class="text-3xl font-bold">₹{{ "{:,.2f}".format(user.balance) }}</p>
+                    <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden mt-4">
+                        <div class="h-full bg-emerald-500 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- Limits Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="font-bold text-gray-900 mb-4 flex items-center">
+                        <div
+                            class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-chart-pie text-sm"></i>
+                        </div>
+                        Daily Limits
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-500">Remaining Today</span>
+                                <span class="font-bold text-emerald-600">₹{{ "{:,.2f}".format(remaining_limit) }}</span>
+                            </div>
+                            <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-600 rounded-full"
+                                    style="width: {{ (remaining_limit / daily_limit * 100) if daily_limit > 0 else 0 }}%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <span class="text-sm text-gray-500">Daily Limit</span>
+                            <span class="font-bold text-gray-900">₹{{ "{:,.2f}".format(daily_limit) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Note -->
+                <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-emerald-800 font-medium">
+                                All withdrawals are secured with end-to-end encryption and logged for your protection.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Quick amount buttons
+        document.querySelectorAll('.quick-amount-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const amount = this.dataset.amount;
+                const input = document.querySelector('input[name="amount"]');
+                input.value = amount;
+                input.focus();
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,288 @@
+{% extends "root/default.html" %}
+
+{% block title %}
+About Us | Bharat Pay
+{% endblock %}
+
+{% block content %}
+<main class="bg-slate-950 text-slate-400">
+    <!-- Hero Section with Mesh Gradients -->
+    <section class="relative pt-32 pb-24 overflow-hidden">
+        <!-- Background Elements -->
+        <div
+            class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-emerald-600/20 rounded-full blur-[120px] -z-10 animate-pulse">
+        </div>
+        <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] -z-10">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="text-center max-w-4xl mx-auto">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8 items-center">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-emerald-400 text-xs font-black uppercase tracking-[0.2em]">Our Story</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9] italic">
+                    REDEFINING THE <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400">FUTURE</span>
+                    OF WEALTH.
+                </h1>
+                <p class="text-xl text-slate-400 leading-relaxed font-medium max-w-2xl mx-auto mb-12">
+                    Bharat Pay is not just a bank; it's a financial engine built for the next generation of digital
+                    pioneers.
+                </p>
+                <div
+                    class="flex items-center justify-center gap-6 text-sm font-bold uppercase tracking-widest text-slate-500 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-fit mx-auto">
+                    <a href="{{ url_for('home_page') }}" class="hover:text-emerald-400 transition-all">Platform</a>
+                    <span class="opacity-20">/</span>
+                    <span class="text-white">Our Mission</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Control Section (Visual Grid) -->
+    <section class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-1000">
+                    </div>
+                    <div class="relative bg-slate-900 rounded-[2.5rem] overflow-hidden border border-white/10">
+                        <img src="{{ url_for('static', filename='root/assets/images/blog2.jpg') }}"
+                            alt="Innovation Center"
+                            class="w-full h-[600px] object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent">
+                        </div>
+                        <div
+                            class="absolute bottom-10 left-10 right-10 p-8 bg-slate-950/80 backdrop-blur-2xl rounded-3xl border border-white/5">
+                            <h4 class="text-white text-2xl font-black italic mb-2 tracking-tight">MISSION CONTROL CENTER
+                            </h4>
+                            <p class="text-emerald-400/60 text-xs font-black tracking-widest uppercase">Mumbai Hub •
+                                2026 Operating Cycle</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter italic">FINANCIAL
+                            EMPOWERMENT THROUGH <span class="text-emerald-500">HYPER-INNOVATION.</span></h2>
+                        <p class="text-lg leading-relaxed text-slate-400 font-medium">
+                            At Bharat Pay, we've stripped away the legacy constraints of traditional banking. We're
+                            building an ecosystem where capital flows at the speed of thought, secured by the most
+                            advanced encryption protocols in existence.
+                        </p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-8">
+                        <div
+                            class="p-6 bg-white/5 rounded-3xl border border-white/10 hover:border-emerald-500/30 transition-all">
+                            <div
+                                class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500 mb-6">
+                                <i class="fas fa-microchip text-xl"></i>
+                            </div>
+                            <h5 class="text-white font-bold mb-2">Neural Security</h5>
+                            <p class="text-sm opacity-60">AI-driven fraud detection that evolves in real-time.</p>
+                        </div>
+                        <div
+                            class="p-6 bg-white/5 rounded-3xl border border-white/10 hover:border-emerald-500/30 transition-all">
+                            <div
+                                class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500 mb-6">
+                                <i class="fas fa-globe-americas text-xl"></i>
+                            </div>
+                            <h5 class="text-white font-bold mb-2">Borderless Rail</h5>
+                            <p class="text-sm opacity-60">Instant global settlements across 180+ countries.</p>
+                        </div>
+                    </div>
+
+                    <a href="{{ url_for('services_page') }}"
+                        class="inline-flex items-center px-10 py-5 bg-white text-slate-950 font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-500 hover:text-white transition-all transform hover:-translate-y-1 shadow-[0_20px_40px_rgba(255,255,255,0.05)]">
+                        Explore Our Ecosystem
+                        <i class="fas fa-arrow-right ml-4 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar (Home Page Style) -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div
+                class="inline-flex flex-wrap items-center justify-center gap-12 w-full p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+                <div class="text-center">
+                    <div class="text-4xl font-black text-white mb-2 tracking-tighter italic">RS {{
+                        "{:,.0f}".format(stats.transaction_volume / 10000000) }}CR+</div>
+                    <div class="text-emerald-500/60 font-black uppercase text-[10px] tracking-[0.3em]">Volume Processed
+                    </div>
+                </div>
+                <div class="w-px h-12 bg-white/10 hidden md:block"></div>
+                <div class="text-center">
+                    <div class="text-4xl font-black text-white mb-2 tracking-tighter italic">{{ stats.total_users }}+
+                    </div>
+                    <div class="text-emerald-500/60 font-black uppercase text-[10px] tracking-[0.3em]">Digital Citizens
+                    </div>
+                </div>
+                <div class="w-px h-12 bg-white/10 hidden md:block"></div>
+                <div class="text-center">
+                    <div class="text-4xl font-black text-white mb-2 tracking-tighter italic">{{ stats.uptime }}%</div>
+                    <div class="text-emerald-500/60 font-black uppercase text-[10px] tracking-[0.3em]">System Uptime
+                    </div>
+                </div>
+                <div class="w-px h-12 bg-white/10 hidden md:block"></div>
+                <div class="text-center">
+                    <div class="text-4xl font-black text-white mb-2 tracking-tighter italic">45+</div>
+                    <div class="text-emerald-500/60 font-black uppercase text-[10px] tracking-[0.3em]">Global Rail Nodes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none italic mb-6">OUR
+                    CORE <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">ARCHETYPES.</span>
+                </h2>
+                <p class="text-slate-500 max-w-xl mx-auto font-medium">The architectural pillars that define every line
+                    of code we write.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Value 1 -->
+                <div
+                    class="group relative p-12 bg-slate-900 border border-white/10 rounded-[2.5rem] hover:bg-slate-800 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 rounded-[2.5rem] transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">INTEGRITY FIRST</h4>
+                    <p class="text-slate-400 leading-relaxed font-medium">We operate with radical transparency and
+                        uncompromising ethical standards in everything we do.</p>
+                    <div
+                        class="mt-8 h-1 w-12 bg-emerald-500/20 group-hover:w-full group-hover:bg-emerald-500 transition-all duration-700">
+                    </div>
+                </div>
+
+                <!-- Value 2 -->
+                <div
+                    class="group relative p-12 bg-slate-900 border border-white/10 rounded-[2.5rem] hover:bg-slate-800 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 rounded-[2.5rem] transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-blue-500/10 text-blue-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-bolt text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">USER VELOCITY</h4>
+                    <p class="text-slate-400 leading-relaxed font-medium">We build systems that move at the speed of
+                        thought, ensuring your finances never lag behind your ambition.</p>
+                    <div
+                        class="mt-8 h-1 w-12 bg-blue-500/20 group-hover:w-full group-hover:bg-blue-500 transition-all duration-700">
+                    </div>
+                </div>
+
+                <!-- Value 3 -->
+                <div
+                    class="group relative p-12 bg-slate-900 border border-white/10 rounded-[2.5rem] hover:bg-slate-800 transition-all duration-500">
+                    <div
+                        class="absolute inset-0 bg-teal-500/5 opacity-0 group-hover:opacity-100 rounded-[2.5rem] transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-teal-500/10 text-teal-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-infinity text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">ETERNAL INNOVATION</h4>
+                    <p class="text-slate-400 leading-relaxed font-medium">The finish line doesn't exist. We are
+                        constantly iterating to provide the world's most advanced banking.</p>
+                    <div
+                        class="mt-8 h-1 w-12 bg-teal-500/20 group-hover:w-full group-hover:bg-teal-500 transition-all duration-700">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-32 bg-slate-900 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none italic mb-6">THE
+                        <span class="text-emerald-500">VISIONARIES.</span></h2>
+                    <p class="text-slate-400 font-medium">Meet the world-class architects behind Bharat Pay's revolution
+                        in digital finance.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div
+                        class="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-black uppercase tracking-widest text-xs">
+                        50+ EXPERTS
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member -->
+                <div
+                    class="group relative bg-slate-950 rounded-[2.5rem] border border-white/5 overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="{{ url_for('static', filename='root/assets/images/t1.jpg') }}" alt="Ariel Vance"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent">
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-black text-white mb-1 tracking-tight italic">ARIEL VANCE</h4>
+                        <p class="text-emerald-500 font-black uppercase text-[10px] tracking-[0.3em]">Chief Product
+                            Architect</p>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div
+                    class="group relative bg-slate-950 rounded-[2.5rem] border border-white/5 overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="{{ url_for('static', filename='root/assets/images/t2.jpg') }}" alt="Marcus Thorne"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent">
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-black text-white mb-1 tracking-tight italic">MARCUS THORNE</h4>
+                        <p class="text-emerald-500 font-black uppercase text-[10px] tracking-[0.3em]">Head of Security
+                            Ops</p>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div
+                    class="group relative bg-slate-950 rounded-[2.5rem] border border-white/5 overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="{{ url_for('static', filename='root/assets/images/t3.jpg') }}" alt="Elias Grey"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent">
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-black text-white mb-1 tracking-tight italic">ELIAS GREY</h4>
+                        <p class="text-emerald-500 font-black uppercase text-[10px] tracking-[0.3em]">Engineering Lead
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

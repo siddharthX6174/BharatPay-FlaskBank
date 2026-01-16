@@ -1,0 +1,253 @@
+{% extends "root/default.html" %}
+
+{% block title %}
+Our Services | Bharat Pay
+{% endblock %}
+
+{% block content %}
+<main class="bg-slate-950 text-slate-400">
+    <!-- Hero Section with Mesh Gradients -->
+    <section class="relative pt-32 pb-24 overflow-hidden">
+        <!-- Background Elements -->
+        <div
+            class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-600/20 rounded-full blur-[120px] -z-10 animate-pulse">
+        </div>
+        <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] -z-10">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative">
+            <div class="text-center max-w-4xl mx-auto">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8 items-center">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-emerald-400 text-xs font-black uppercase tracking-[0.2em]">Our Ecosystem</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9] italic">
+                    FINANCIAL <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-400">MASTERY.</span>
+                </h1>
+                <p class="text-xl text-slate-400 leading-relaxed font-medium max-w-2xl mx-auto mb-12">
+                    Professional-grade banking solutions engineered for the modern digital elite.
+                </p>
+                <div
+                    class="flex items-center justify-center gap-6 text-sm font-bold uppercase tracking-widest text-slate-500 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-fit mx-auto">
+                    <a href="{{ url_for('home_page') }}" class="hover:text-emerald-400 transition-all">Platform</a>
+                    <span class="opacity-20">/</span>
+                    <span class="text-white">Services</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center mb-32">
+                <div class="space-y-12">
+                    <div>
+                        <h2
+                            class="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter italic leading-tight">
+                            PROFESSIONAL SERVICE FOR A <span class="text-emerald-500 uppercase">DIGITAL FIRST</span>
+                            WORLD.</h2>
+                        <p class="text-lg leading-relaxed text-slate-400 font-medium">
+                            We've eliminated the friction of legacy finance. Our suite of services offers unparalleled
+                            precision, security, and global reach for those who demand more from their capital.
+                        </p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start group">
+                            <div
+                                class="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mr-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-1 tracking-tight">Global Financial Council
+                                </h4>
+                                <p class="text-slate-500 font-medium">Connect with a network of elite users and
+                                    professional advisors worldwide.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start group">
+                            <div
+                                class="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mr-6 group-hover:bg-blue-500 group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
+                                <i class="fas fa-laptop-code text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-1 tracking-tight">Advanced Developer API</h4>
+                                <p class="text-slate-500 font-medium">Integrate your financial flows directly into your
+                                    custom applications and bots.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-1000">
+                    </div>
+                    <div class="relative bg-slate-900 rounded-[2.5rem] overflow-hidden border border-white/10">
+                        <img src="{{ url_for('static', filename='root/assets/images/services.jpg') }}"
+                            alt="Services Dashboard"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid (Redesigned) -->
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1 space-y-8">
+                    <!-- Feature Card -->
+                    <div
+                        class="group bg-white/5 rounded-[2rem] p-8 border border-white/10 flex items-start hover:bg-white/10 transition-all duration-500 shadow-2xl">
+                        <div
+                            class="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mr-8 flex-shrink-0 text-emerald-500 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all">
+                            <i class="fas fa-sliders-h text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-white mb-2 italic tracking-tight uppercase">
+                                OMNI-CUSTOMIZATION</h4>
+                            <p class="text-slate-400 font-medium leading-relaxed">Personalize every pixel of your
+                                banking environment for maximum operational efficiency.</p>
+                        </div>
+                    </div>
+                    <!-- Feature Card -->
+                    <div
+                        class="group bg-white/5 rounded-[2rem] p-8 border border-white/10 flex items-start hover:bg-white/10 transition-all duration-500 shadow-2xl">
+                        <div
+                            class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mr-8 flex-shrink-0 text-blue-500 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all">
+                            <i class="fas fa-fingerprint text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-white mb-2 italic tracking-tight uppercase">BIOMETRIC
+                                VAULT</h4>
+                            <p class="text-slate-400 font-medium leading-relaxed">Zero-knowledge proof encryption
+                                combined with military-grade biometric authentication.</p>
+                        </div>
+                    </div>
+                    <!-- Feature Card -->
+                    <div
+                        class="group bg-white/5 rounded-[2rem] p-8 border border-white/10 flex items-start hover:bg-white/10 transition-all duration-500 shadow-2xl">
+                        <div
+                            class="w-16 h-16 bg-teal-500/10 rounded-2xl flex items-center justify-center mr-8 flex-shrink-0 text-teal-500 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.3)] transition-all">
+                            <i class="fas fa-microchip text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-white mb-2 italic tracking-tight uppercase">AUTOMATED
+                                LOGIC</h4>
+                            <p class="text-slate-400 font-medium leading-relaxed">Deploy smart-contract-style rules for
+                                complex financial automation and family wealth flows.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <h3 class="text-emerald-500 font-black uppercase text-xs tracking-[0.4em] mb-4">The Ecosystem</h3>
+                    <h2
+                        class="text-5xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-none italic uppercase">
+                        AMPLIFY YOUR <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">POTENTIAL.</span>
+                    </h2>
+                    <p class="text-lg leading-relaxed text-slate-500 font-medium mb-12">
+                        We don't just manage money; we provide the tools to weaponize your financial foresight. Our
+                        infrastructure is built to scale at the speed of your ambition.
+                    </p>
+                    <a href="{{ url_for('register_page') }}"
+                        class="inline-flex items-center px-10 py-5 bg-emerald-500 text-slate-950 font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-400 transition-all transform hover:-translate-y-1 shadow-[0_20px_40px_rgba(16,185,129,0.2)] group">
+                        GET STARTED FREE
+                        <i
+                            class="fas fa-rocket ml-4 text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Pillars / Service Cards -->
+    <section class="py-32 relative overflow-hidden" id="services">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none italic mb-6">THE
+                    CORE <span class="text-emerald-500">PILLARS.</span></h2>
+                <p class="text-slate-500 max-w-2xl mx-auto font-medium text-lg leading-relaxed">From individual
+                    sovereignty to institutional dominance, our services cover the entire modern financial spectrum.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pillar 1 -->
+                <div
+                    class="group relative bg-slate-900 border border-white/10 rounded-[2.5rem] p-12 hover:bg-slate-800 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-user-shield text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">PRIVATE BANKING</h4>
+                    <p class="text-slate-400 font-medium leading-relaxed mb-8 flex-grow">Elite personal banking with
+                        dedicated advisors and exclusive financial instruments.</p>
+                    <div class="space-y-4 pt-4 border-t border-white/5">
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-emerald-500 mr-4"></i> Premium Credit Lines
+                        </div>
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-emerald-500 mr-4"></i> Priority Global Support
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div
+                    class="group relative bg-slate-900 border border-white/10 rounded-[2.5rem] p-12 hover:bg-slate-800 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-blue-500/10 text-blue-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-chart-line text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">WEALTH INTELLIGENCE</h4>
+                    <p class="text-slate-400 font-medium leading-relaxed mb-8 flex-grow">Grow your capital with our
+                        AI-enhanced portfolio management and market signals.</p>
+                    <div class="space-y-4 pt-4 border-t border-white/5">
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-blue-500 mr-4"></i> Smart Portfolios
+                        </div>
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-blue-500 mr-4"></i> Efficient Strategies
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div
+                    class="group relative bg-slate-900 border border-white/10 rounded-[2.5rem] p-12 hover:bg-slate-800 transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="w-20 h-20 bg-teal-500/10 text-teal-500 rounded-3xl flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                        <i class="fas fa-globe-americas text-3xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-white mb-4 italic tracking-tight">GLOBAL TRADE RAIL</h4>
+                    <p class="text-slate-400 font-medium leading-relaxed mb-8 flex-grow">Seamless international commerce
+                        with multi-currency accounts and trade finance.</p>
+                    <div class="space-y-4 pt-4 border-t border-white/5">
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-teal-500 mr-4"></i> 40+ Currencies Supported
+                        </div>
+                        <div class="flex items-center text-sm font-bold text-slate-300">
+                            <i class="fas fa-check-circle text-teal-500 mr-4"></i> Real-time Settlements
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

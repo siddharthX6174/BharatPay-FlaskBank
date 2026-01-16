@@ -1,0 +1,558 @@
+{% extends 'user/default.html' %}
+
+{% block title %}
+Financial Insights | Bharat Pay
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-[#F8F9FA] pt-6">
+    <div class="w-full px-8 lg:px-12 xl:px-16 py-8">
+
+        <!-- Welcome Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Welcome, {{ user.full_name.split()[0] }}!</h1>
+            <p class="text-gray-500 text-sm mt-1">Effortlessly manage your finances with real-time insights</p>
+        </div>
+
+        <!-- Page Title & Search -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 gap-4">
+            <h2 class="text-3xl font-bold text-gray-900">Financial Insights Dashboard</h2>
+            <div class="relative">
+                <input type="text" placeholder="Search for a specific transaction or data"
+                    class="w-full lg:w-80 pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <!-- Total Balance Card -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium mb-1">Total<br>Balance</p>
+                        <h3 class="text-4xl font-bold text-gray-900">Rs {{ "{:,.2f}".format(user.balance) }}</h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg flex items-center">
+                            <i class="fas fa-arrow-up mr-1 text-[10px]"></i>+{{ insights.balance_growth }}%
+                        </span>
+                        <span class="text-xs text-gray-400">Last<br>Month</span>
+                    </div>
+                </div>
+                <div class="flex items-center text-emerald-600">
+                    <i class="fas fa-arrow-trend-up mr-2"></i>
+                    <span class="text-sm font-medium">Account is in good standing</span>
+                </div>
+            </div>
+
+            <!-- Total Transactions Card -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-start justify-between mb-4">
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase tracking-wider font-medium mb-1">Total<br>Transactions
+                        </p>
+                        <h3 class="text-4xl font-bold text-gray-900">{{ transactions|length }}</h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="{% if insights.transaction_change >= 0 %}text-emerald-600 bg-emerald-50{% else %}text-rose-600 bg-rose-50{% endif %} text-xs font-bold px-2 py-1 rounded-lg flex items-center">
+                            <i
+                                class="fas {% if insights.transaction_change >= 0 %}fa-arrow-up{% else %}fa-arrow-down{% endif %} mr-1 text-[10px]"></i>{{
+                            insights.transaction_change if insights.transaction_change >= 0 else
+                            -insights.transaction_change }}%
+                        </span>
+                        <span class="text-xs text-gray-400">Last<br>Month</span>
+                    </div>
+                </div>
+                <div class="flex items-center text-gray-500">
+                    <i class="fas fa-receipt mr-2"></i>
+                    <span class="text-sm font-medium">This month's activity</span>
+                </div>
+            </div>
+
+            <!-- Available Savings Card (Accent) -->
+            <div
+                class="bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-2xl p-5 shadow-lg text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-emerald-200 text-sm font-medium">Available Balance</p>
+                        <i class="fas fa-info-circle text-emerald-300"></i>
+                    </div>
+                    <h3 class="text-4xl font-bold mb-4">Rs {{ "{:,.2f}".format(user.balance) }}</h3>
+                    <p class="text-emerald-200 text-sm">
+                        <span class="text-white font-bold">100%</span> of total balance available
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mt-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="{{ url_for('transfer') }}"
+                    class="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:bg-emerald-600 transition-colors">
+                        <i class="fas fa-paper-plane text-emerald-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Send Money</h4>
+                        <p class="text-xs text-gray-500">Transfer funds instantly</p>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('deposit') }}"
+                    class="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-plus text-blue-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Add Funds</h4>
+                        <p class="text-xs text-gray-500">Top up your account</p>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('withdraw') }}"
+                    class="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group">
+                    <div
+                        class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center group-hover:bg-violet-600 transition-colors">
+                        <i class="fas fa-wallet text-violet-600 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900">Withdraw</h4>
+                        <p class="text-xs text-gray-500">Cash out to bank</p>
+                    </div>
+                </a>
+
+                <!-- Beneficiaries Section -->
+                <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="font-semibold text-gray-900">Beneficiaries</h4>
+                        <a href="{{ url_for('beneficiaries') }}"
+                            class="text-xs text-emerald-600 font-semibold hover:text-emerald-700">Manage</a>
+                    </div>
+                    {% if beneficiaries %}
+                    <div class="flex flex-wrap gap-3">
+                        {% for b in beneficiaries %}
+                        <div class="text-center group cursor-pointer">
+                            <div
+                                class="w-11 h-11 bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-700 rounded-xl flex items-center justify-center font-bold text-sm group-hover:from-emerald-500 group-hover:to-teal-500 group-hover:text-white transition-all">
+                                {{ b.beneficiary_name[0] | upper }}
+                            </div>
+                            <p class="text-[9px] font-medium text-gray-500 mt-1 truncate w-11">{{ b.nickname or
+                                b.beneficiary_name.split()[0] }}</p>
+                        </div>
+                        {% endfor %}
+                        <a href="{{ url_for('beneficiaries') }}" class="text-center group">
+                            <div
+                                class="w-11 h-11 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center border-2 border-dashed border-gray-200 group-hover:border-emerald-500 group-hover:text-emerald-500 transition-all">
+                                <i class="fas fa-plus text-xs"></i>
+                            </div>
+                            <p class="text-[9px] font-medium text-gray-500 mt-1">Add</p>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-user-plus text-gray-300"></i>
+                        </div>
+                        <p class="text-xs text-gray-500">No beneficiaries yet</p>
+                        <a href="{{ url_for('beneficiaries') }}"
+                            class="text-xs text-emerald-600 font-semibold hover:underline">Add one</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Insights Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+            <!-- Expenditure Category (Donut Chart Style) -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col">
+                <h3 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider opacity-60">Transaction
+                    Categories</h3>
+
+                <!-- Simple Donut Visualization -->
+                <div class="relative w-40 h-40 mx-auto mb-4">
+                    <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                        <!-- Background track -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#F1F5F9" stroke-width="12" />
+
+                        <!-- Segments using pathLength for precision -->
+                        <!-- Deposits -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#0D9488" stroke-width="12"
+                            stroke-dasharray="{{ insights.category_percentages.deposit }} 100" stroke-dashoffset="0"
+                            pathLength="100" stroke-linecap="round" class="transition-all duration-1000" />
+
+                        <!-- Transfers -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#059669" stroke-width="12"
+                            stroke-dasharray="{{ insights.category_percentages.transfer }} 100"
+                            stroke-dashoffset="-{{ insights.category_percentages.deposit }}" pathLength="100"
+                            stroke-linecap="round" class="transition-all duration-1000" />
+
+                        <!-- Recharges -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#34D399" stroke-width="12"
+                            stroke-dasharray="{{ insights.category_percentages.recharge }} 100"
+                            stroke-dashoffset="-{{ insights.category_percentages.deposit + insights.category_percentages.transfer }}"
+                            pathLength="100" stroke-linecap="round" class="transition-all duration-1000" />
+
+                        <!-- Withdrawals -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#FB7185" stroke-width="12"
+                            stroke-dasharray="{{ insights.category_percentages.withdrawal }} 100"
+                            stroke-dashoffset="-{{ insights.category_percentages.deposit + insights.category_percentages.transfer + insights.category_percentages.recharge }}"
+                            pathLength="100" stroke-linecap="round" class="transition-all duration-1000" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Activity</span>
+                        <span class="text-xl font-black text-gray-900">Total</span>
+                    </div>
+                </div>
+
+                <!-- Legend (Compact Grid) -->
+                <div class="grid grid-cols-1 gap-y-2.5 mt-auto">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-[#059669] rounded-full mr-3"></div>
+                            <span class="text-xs text-gray-700 font-medium">Transfers</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-900">{{ insights.category_percentages.transfer
+                            }}%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-[#0D9488] rounded-full mr-3"></div>
+                            <span class="text-xs text-gray-700 font-medium">Deposits</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-900">{{ insights.category_percentages.deposit
+                            }}%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-[#34D399] rounded-full mr-3"></div>
+                            <span class="text-xs text-gray-700 font-medium">Recharges</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-900">{{ insights.category_percentages.recharge
+                            }}%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-[#FB7185] rounded-full mr-3"></div>
+                            <span class="text-xs text-gray-700 font-medium">Withdrawals</span>
+                        </div>
+                        <span class="text-xs font-bold text-gray-900">{{ insights.category_percentages.withdrawal
+                            }}%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Financial Line Graph -->
+            <div class="lg:col-span-1 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider opacity-60">Monthly Activity
+                    </h3>
+                    <select
+                        class="text-xs border border-gray-100 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 bg-gray-50 font-medium">
+                        {% for month in insights.available_months %}
+                        <option {% if month==insights.current_month %}selected{% endif %}>{{ month }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Line Graph Visualization -->
+                <div class="relative w-full mb-6" style="height: 200px;">
+                    <svg class="w-full h-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                        <!-- Definitions for Gradients -->
+                        <defs>
+                            <linearGradient id="lineAltGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#10B981" stop-opacity="0.2" />
+                                <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Horizontal Grid Lines -->
+                        <line x1="0" y1="0" x2="100" y2="0" stroke="#F1F5F9" stroke-width="0.5" />
+                        <line x1="0" y1="33" x2="100" y2="33" stroke="#F1F5F9" stroke-width="0.5" />
+                        <line x1="0" y1="66" x2="100" y2="66" stroke="#F1F5F9" stroke-width="0.5" />
+                        <line x1="0" y1="100" x2="100" y2="100" stroke="#F1F5F9" stroke-width="0.5" />
+
+                        {% set max_vol = insights.weekly_activity | map(attribute='volume') | list | max %}
+                        {% if max_vol > 0 %}
+                        {% set points = [] %}
+                        {% for item in insights.weekly_activity %}
+                        {% set x = loop.index0 * (100 / (insights.weekly_activity|length - 1)) %}
+                        {% set y = 100 - (item.volume / max_vol * 100) %}
+                        {% set _ = points.append(x|string + "," + y|string) %}
+                        {% endfor %}
+
+                        <!-- Area Gradient -->
+                        <path d="M 0,100 {% for p in points %}L {{ p }} {% endfor %} L 100,100 Z"
+                            fill="url(#lineAltGradient)" />
+
+                        <!-- Main Line -->
+                        <path d="M {{ points[0] }} {% for p in points[1:] %}L {{ p }} {% endfor %}" fill="none"
+                            stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+                        <!-- Data Points -->
+                        {% for p in points %}
+                        <circle cx="{{ p.split(',')[0] }}" cy="{{ p.split(',')[1] }}" r="3" fill="white"
+                            stroke="#10B981" stroke-width="2" class="hover:r-4 transition-all cursor-pointer" />
+                        {% endfor %}
+                        {% else %}
+                        <!-- Empty State Line -->
+                        <line x1="0" y1="100" x2="100" y2="100" stroke="#E2E8F0" stroke-width="2"
+                            stroke-dasharray="4" />
+                        {% endif %}
+                    </svg>
+                </div>
+
+                <!-- X-Axis Labels -->
+                <div class="flex justify-between mt-auto px-1">
+                    {% for item in insights.weekly_activity %}
+                    <span class="text-[10px] text-gray-400 font-bold uppercase">{{ item.day }}</span>
+                    {% endfor %}
+                </div>
+
+                <div
+                    class="mt-4 flex items-center justify-between text-[10px] text-gray-400 border-t border-gray-50 pt-3">
+                    <span>Peak: Rs {{ "{:,.0f}".format(max_vol) }}</span>
+                    <span>7-Day Volume Trend</span>
+                </div>
+            </div>
+
+            <!-- Bharat Pay Virtual Card (Isolated) -->
+            <div class="flex flex-col justify-center">
+                <div class="relative group">
+                    <!-- Toggle Button (Better Positioned Away from Edge) -->
+                    <div class="flex justify-end mb-3">
+                        <button id="toggleCardNumber"
+                            class="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-100 shadow-sm transition-all hover:shadow-md">
+                            <i class="fas fa-eye text-[9px]" id="toggleIcon"></i>
+                            <span id="toggleText">Details</span>
+                        </button>
+                    </div>
+
+                    <div class="relative bg-slate-900 rounded-[1.5rem] p-9 text-white overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-emerald-500/20"
+                        style="aspect-ratio: 1.586/1;">
+                        <!-- Mesh Gradient Background -->
+                        <div class="absolute inset-0 opacity-40">
+                            <div
+                                class="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-emerald-500/30 rounded-full blur-[100px]">
+                            </div>
+                            <div
+                                class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-emerald-400/20 rounded-full blur-[80px]">
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 flex flex-col h-full">
+                            <!-- Card Header -->
+                            <div class="flex items-center justify-between mb-auto">
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ url_for('static', filename='assets/images/bank-logo.svg') }}"
+                                        alt="Bharat Pay" class="h-6 w-auto brightness-0 invert">
+                                    <span class="font-bold text-sm tracking-widest opacity-90">BHARAT PAY</span>
+                                </div>
+                                <div class="text-xs font-bold tracking-[0.2em] text-white/30 uppercase italic">Debit
+                                </div>
+                            </div>
+
+                            <!-- Card Number -->
+                            <div class="mt-4 text-center py-4">
+                                <div id="cardNumberDisplay"
+                                    class="font-mono tracking-[0.25em] transition-all duration-300">
+                                    <span class="opacity-50 text-2xl">•••• ••••</span>
+                                    <span class="ml-2 text-3xl font-black">{{ user.card_number[-4:] }}</span>
+                                </div>
+                                <input type="hidden" id="fullCardNumber" value="{{ user.card_number }}">
+                            </div>
+
+                            <!-- Card Footer -->
+                            <div class="flex justify-between items-end mt-auto">
+                                <div class="flex-1">
+                                    <p class="text-[10px] text-white/40 uppercase tracking-[0.2em] leading-none mb-2">
+                                        Cardholder</p>
+                                    <p class="text-base font-medium tracking-wider uppercase">{{ user.full_name }}</p>
+                                </div>
+                                <div class="text-right flex-shrink-0 ml-8">
+                                    <p class="text-[10px] text-white/40 uppercase tracking-[0.2em] leading-none mb-2">
+                                        Expires</p>
+                                    <p class="text-base font-medium tracking-wider">
+                                        {{ (user.created_at.year + 5) | string }}/{{ user.created_at.strftime('%m') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="mt-6">
+        <!-- Recent Transactions Table -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-gray-900">Recent Transactions</h3>
+                <a href="{{ url_for('transaction_history') }}"
+                    class="text-emerald-600 text-sm font-semibold hover:text-emerald-700 flex items-center gap-1">
+                    View All <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            {% if transactions %}
+            <div class="divide-y divide-gray-50">
+                {% for transaction in transactions[:5] %}
+                <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50/50 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center
+                                {% if transaction.type in ['credit', 'deposit'] %}
+                                    bg-emerald-100 text-emerald-600
+                                {% else %}
+                                    bg-rose-100 text-rose-600
+                                {% endif %}">
+                            <i
+                                class="fas {% if transaction.type in ['credit', 'deposit'] %}fa-arrow-down{% else %}fa-arrow-up{% endif %} text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-sm">{{ transaction.description or
+                                transaction.type|capitalize }}</p>
+                            <p class="text-xs text-gray-400">{{ transaction.timestamp.strftime('%d %b, %Y') }}</p>
+                        </div>
+                    </div>
+                    <p
+                        class="font-bold {% if transaction.type in ['credit', 'deposit'] %}text-emerald-600{% else %}text-rose-600{% endif %}">
+                        {% if transaction.type in ['credit', 'deposit'] %}+{% else %}-{% endif %}Rs {{
+                        "{:,.2f}".format(transaction.amount) }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="p-12 text-center">
+                <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-receipt text-gray-300 text-2xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">No transactions yet</p>
+                <p class="text-gray-400 text-sm mt-1">Start by adding funds to your account</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <!-- Floating Support Chat Bubble -->
+    <div class="fixed bottom-8 right-8 z-50">
+        <button id="chatToggle"
+            class="w-14 h-14 bg-emerald-600 text-white rounded-full shadow-2xl shadow-emerald-500/40 flex items-center justify-center hover:bg-emerald-700 transition-all hover:scale-110 group">
+            <i class="fas fa-comment-dots text-2xl group-hover:rotate-12 transition-transform"></i>
+        </button>
+
+        <!-- Chat Window (Premium Glass) -->
+        <div id="chatWindow"
+            class="hidden absolute bottom-20 right-0 w-80 bg-white/95 backdrop-blur-xl border border-gray-100 rounded-[2rem] shadow-2xl overflow-hidden flex flex-col origin-bottom-right transition-all transform scale-95 opacity-0">
+            <div class="bg-emerald-600 p-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-headset text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold">Bharat Support</h4>
+                        <p class="text-emerald-100 text-[10px] uppercase tracking-wider">AI Assistant Online</p>
+                    </div>
+                </div>
+                <button id="chatClose" class="text-white/60 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 h-64 overflow-y-auto space-y-4 bg-gray-50/50">
+                <div class="flex items-start gap-2">
+                    <div
+                        class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 text-[10px]">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div
+                        class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-xs text-gray-600 border border-gray-100">
+                        Hello {{ user.full_name.split()[0] }}! How can I assist you with your finances today?
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-white border-t border-gray-100 flex items-center gap-2">
+                <input type="text" placeholder="Type your message..."
+                    class="flex-1 bg-gray-50 border-none rounded-xl px-4 py-2 text-xs focus:ring-2 focus:ring-emerald-500/20 outline-none">
+                <button
+                    class="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center hover:bg-emerald-700">
+                    <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Chat Toggle Logic
+            const chatToggle = document.getElementById('chatToggle');
+            const chatClose = document.getElementById('chatClose');
+            const chatWindow = document.getElementById('chatWindow');
+
+            if (chatToggle && chatWindow) {
+                chatToggle.addEventListener('click', () => {
+                    const isHidden = chatWindow.classList.contains('hidden');
+                    if (isHidden) {
+                        chatWindow.classList.remove('hidden');
+                        setTimeout(() => {
+                            chatWindow.classList.remove('scale-95', 'opacity-0');
+                            chatWindow.classList.add('scale-100', 'opacity-100');
+                        }, 10);
+                    } else {
+                        chatWindow.classList.add('scale-95', 'opacity-0');
+                        chatWindow.classList.remove('scale-100', 'opacity-100');
+                        setTimeout(() => chatWindow.classList.add('hidden'), 300);
+                    }
+                });
+            }
+
+            if (chatClose && chatWindow) {
+                chatClose.addEventListener('click', () => {
+                    chatWindow.classList.add('scale-95', 'opacity-0');
+                    chatWindow.classList.remove('scale-100', 'opacity-100');
+                    setTimeout(() => chatWindow.classList.add('hidden'), 300);
+                });
+            }
+
+            // Virtual Card Toggle Logic
+            const toggleBtn = document.getElementById('toggleCardNumber');
+            const cardDisplay = document.getElementById('cardNumberDisplay');
+            const fullNumber = document.getElementById('fullCardNumber')?.value;
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleText = document.getElementById('toggleText');
+            let isVisible = false;
+
+            if (toggleBtn && cardDisplay && fullNumber) {
+                toggleBtn.addEventListener('click', function () {
+                    isVisible = !isVisible;
+                    if (isVisible) {
+                        // Show full number with proper formatting
+                        const formatted = fullNumber.match(/.{1,4}/g).join(' ');
+                        cardDisplay.innerHTML = `<span class="text-xl font-black tracking-widest leading-none">${formatted}</span>`;
+                        toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                        toggleText.textContent = 'Hide';
+                    } else {
+                        // Mask number
+                        cardDisplay.innerHTML = `
+                                <span class="opacity-50 text-2xl">•••• ••••</span>
+                                <span class="ml-2 text-3xl font-black">${fullNumber.slice(-4)}</span>
+                            `;
+                        toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                        toggleText.textContent = 'Details';
+                    }
+                });
+            }
+        });
+    </script>
+    {% endblock %}

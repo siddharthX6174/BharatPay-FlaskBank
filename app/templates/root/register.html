@@ -1,0 +1,288 @@
+{% extends 'root/default.html' %}
+
+{% block title %}
+Register | Bharat Pay
+{% endblock %}
+
+{% block content %}
+<main class="min-h-screen flex bg-slate-950 text-slate-400 overflow-hidden relative">
+    <!-- Animated Background Blobs -->
+    <div
+        class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-600/10 rounded-full blur-[120px] -z-10 animate-blob">
+    </div>
+    <div
+        class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] -z-10 animate-blob animation-delay-2000">
+    </div>
+
+    <!-- Left Side - Visual Content -->
+    <div class="hidden lg:flex lg:w-1/3 relative overflow-hidden border-r border-white/5">
+        <!-- Visual Overlay -->
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/80 to-emerald-900/20 opacity-90 z-10">
+        </div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-30 z-0 scale-110"
+            style="background-image: url('https://images.unsplash.com/photo-1556740758-90eb39f32339?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+        </div>
+
+        <div class="relative z-20 w-full flex flex-col justify-center px-12">
+            <div class="max-w-md">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8">
+                    <span class="text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em]">Protocol Node
+                        Expansion</span>
+                </div>
+
+                <h1 class="text-5xl font-black text-white mb-8 tracking-tighter leading-[0.9] italic">
+                    JOIN THE <br /> <span class="text-emerald-500 uppercase">ELITE CIRCLE.</span>
+                </h1>
+
+                <p class="text-base text-slate-400 font-medium leading-relaxed mb-12">
+                    Initialize your terminal in the most secure digital banking ecosystem ever engineered.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center shrink-0">
+                            <i class="fas fa-check text-emerald-500 text-xs"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-sm tracking-tight uppercase">ZERO FRICTION FEES</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">No maintenance or operational costs
+                                across all nodes.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0">
+                            <i class="fas fa-check text-blue-500 text-xs"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-sm tracking-tight uppercase">QUANTUM SHIELD</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">Institutional-grade encryption protecting
+                                every byte.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 pt-8 border-t border-white/5">
+                    <div
+                        class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">
+                        <i class="fas fa-shield-check text-emerald-500"></i>
+                        <span>ENCRYPTION ACTIVE: AES-256-GCM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side - Registration Form -->
+    <div
+        class="w-full lg:w-2/3 flex items-center justify-center p-8 lg:p-12 bg-slate-950/50 overflow-y-auto relative z-20 backdrop-blur-sm">
+        <div class="w-full max-w-3xl">
+            <div class="mb-12">
+                <div class="lg:hidden flex mb-8">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center">
+                            <img src="{{ url_for('static', filename='assets/images/bank-logo.svg') }}"
+                                class="w-5 h-5 invert brightness-0">
+                        </div>
+                        <span class="text-xl font-black text-white italic tracking-tighter">BHARAT PAY</span>
+                    </div>
+                </div>
+                <h2 class="text-4xl font-black text-white tracking-tighter italic uppercase mb-2">INITIALIZE ACCOUNT.
+                </h2>
+                <p class="text-slate-500 font-medium">Register your unique digital identity signature.</p>
+            </div>
+
+            <form method="POST" class="space-y-8">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Full Name -->
+                    <div class="group space-y-2">
+                        <label for="full_name"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Identity
+                            Signature</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <input type="text" id="full_name" name="full_name" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="John Doe" />
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="group space-y-2">
+                        <label for="email"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Communication
+                            Link</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <input type="email" id="email" name="email" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="john@example.com" />
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="group space-y-2">
+                        <label for="password"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Security
+                            Key</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="Min. 8 characters" />
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="group space-y-2">
+                        <label for="confirm_password"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Verify
+                            Key</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <input type="password" id="confirm_password" name="confirm_password" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="Re-enter security key" />
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="group space-y-2">
+                        <label for="phone"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Mobile
+                            Signal</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <input type="tel" id="phone" name="phone" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="+91 XXXXX XXXXX" pattern="[+]?[0-9]{10,15}" />
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="group space-y-2">
+                        <label for="address"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Physical
+                            Node</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-600 group-focus-within:text-emerald-500 transition-all">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <input type="text" id="address" name="address" required
+                                class="w-full pl-14 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="Street Address" />
+                        </div>
+                    </div>
+
+                    <!-- City -->
+                    <div class="group space-y-2">
+                        <label for="city"
+                            class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">City
+                            Zone</label>
+                        <input type="text" id="city" name="city" required
+                            class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                            placeholder="e.g. Mumbai" />
+                    </div>
+
+                    <!-- State & Pincode -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="group space-y-2">
+                            <label for="state"
+                                class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">State</label>
+                            <input type="text" id="state" name="state" required
+                                class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="MH" />
+                        </div>
+                        <div class="group space-y-2">
+                            <label for="pincode"
+                                class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.3em] ml-2 group-focus-within:text-white transition-colors">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" required pattern="[0-9]{5,10}"
+                                class="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white font-medium focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all outline-none placeholder-slate-800"
+                                placeholder="400001" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-500/5 border border-blue-500/20 rounded-[2rem] p-6 flex items-start gap-4">
+                    <div class="mt-1 text-blue-500">
+                        <i class="fas fa-info-circle text-lg"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed font-bold uppercase tracking-wider">
+                        Protocol Notice: To ensure maximum ecosystem integrity, all new citizen registrations undergo
+                        manual neural review by the administration team. Approval signal will be transmitted via your
+                        provided email link.
+                    </p>
+                </div>
+
+                <div class="pt-8 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    <p class="text-sm font-bold text-slate-600 text-center md:text-left uppercase tracking-widest">
+                        Already Registered?
+                        <a href="{{ url_for('login') }}"
+                            class="text-white hover:text-emerald-500 transition-colors ml-2 font-black italic">Sign In
+                            <i class="fas fa-arrow-right ml-2 text-[10px]"></i></a>
+                    </p>
+                    <button type="submit"
+                        class="w-full md:w-auto px-12 py-6 bg-white text-slate-950 rounded-2xl hover:bg-emerald-500 hover:text-white transition-all flex items-center justify-center font-black uppercase tracking-[0.2em] shadow-2xl transform hover:-translate-y-1 group relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity z-0">
+                        </div>
+                        <span class="relative z-10">GENERATE SECURE ACCOUNT</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-16 text-center text-[10px] font-black text-slate-700 uppercase tracking-[0.3em]">
+                &copy; 2026 BHARAT PAY • DIGITAL FINANCE SOLUTIONS • ALL NODES PROTECTED
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    @keyframes blob {
+        0% {
+            transform: translate(0, 0) scale(1);
+        }
+
+        33% {
+            transform: translate(30px, -50px) scale(1.1);
+        }
+
+        66% {
+            transform: translate(-20px, 20px) scale(0.9);
+        }
+
+        100% {
+            transform: translate(0, 0) scale(1);
+        }
+    }
+
+    .animate-blob {
+        animation: blob 15s infinite alternate ease-in-out;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 3s;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="description" content="Modern Banking Dashboard" />
+  <meta name="author" content="Bharat Pay" />
+  <title>
+    {% block title %}
+    Bharat Pay
+    {% endblock %}
+  </title>
+
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="bg-[#F8F9FA] font-sans text-gray-900">
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="fixed top-20 right-4 z-50 space-y-3">
+    {% for category, message in messages %}
+    <div
+      class="{% if category == 'success' %}bg-white border-l-4 border-emerald-500 text-emerald-900{% elif category == 'danger' %}bg-white border-l-4 border-rose-500 text-rose-900{% elif category == 'info' %}bg-white border-l-4 border-sky-500 text-sky-900{% else %}bg-white border-l-4 border-amber-500 text-amber-900{% endif %} p-4 rounded-xl shadow-xl max-w-sm"
+      role="alert">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-lg flex items-center justify-center {% if category == 'success' %}bg-emerald-100 text-emerald-600{% elif category == 'danger' %}bg-rose-100 text-rose-600{% elif category == 'info' %}bg-sky-100 text-sky-600{% else %}bg-amber-100 text-amber-600{% endif %}">
+            <i
+              class="{% if category == 'success' %}fas fa-check{% elif category == 'danger' %}fas fa-times{% elif category == 'info' %}fas fa-info{% else %}fas fa-exclamation{% endif %} text-sm"></i>
+          </div>
+          <p class="font-semibold text-sm">{{ message }}</p>
+        </div>
+        <button onclick="this.parentElement.parentElement.remove()"
+          class="text-gray-400 hover:text-gray-600 transition-colors">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Include Navbar -->
+  {% include 'user/partials/navbar.html' %}
+
+  <!-- Main Content with top padding for fixed navbar -->
+  <main class="pt-20">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    // Sidebar Toggle Logic
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+      });
+    }
+
+    // Auto-dismiss flash messages after 5 seconds
+    setTimeout(() => {
+      document.querySelectorAll('[role="alert"]').forEach(el => {
+        el.style.transition = 'opacity 0.3s ease-out';
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 300);
+      });
+    }, 5000);
+  </script>
+</body>
+
+</html>

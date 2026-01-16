@@ -1,0 +1,134 @@
+<!-- User Navbar Component - Floating Glass Style -->
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 w-auto">
+    <div class="bg-white/40 backdrop-blur-2xl border border-white/30 shadow-lg shadow-black/5 rounded-full px-3 py-3">
+        <div class="flex items-center gap-2">
+            <!-- Logo -->
+            <a href="{{ url_for('dashboard') }}" class="flex items-center gap-3 pl-2 pr-5">
+                <img src="{{ url_for('static', filename='assets/images/bank-logo.svg') }}" alt="Bharat Pay"
+                    class="w-10 h-10">
+                <span class="text-lg font-bold text-gray-800 hidden sm:block">Bharat Pay</span>
+            </a>
+
+            <!-- Divider -->
+            <div class="w-px h-8 bg-gray-300/50"></div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center">
+                <a href="{{ url_for('dashboard') }}"
+                    class="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                    Dashboard
+                </a>
+                <a href="{{ url_for('transfer') }}"
+                    class="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                    Transfer
+                </a>
+                <a href="{{ url_for('transaction_history') }}"
+                    class="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                    History
+                </a>
+                <a href="{{ url_for('beneficiaries') }}"
+                    class="px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                    Beneficiaries
+                </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="w-px h-8 bg-gray-300/50 hidden md:block"></div>
+
+            <!-- User Avatar -->
+            <div class="relative" id="userDropdown">
+                <button id="userDropdownBtn"
+                    class="w-10 h-10 bg-gray-800/80 hover:bg-gray-800 text-white rounded-full flex items-center justify-center font-semibold text-sm transition-all backdrop-blur-sm">
+                    {{ user.full_name[0] }}
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="userDropdownMenu"
+                    class="hidden absolute right-0 mt-3 w-52 bg-white/80 backdrop-blur-2xl rounded-2xl shadow-xl border border-white/50 py-2 z-50">
+                    <div class="px-4 py-3 border-b border-gray-200/50">
+                        <p class="font-semibold text-gray-900">{{ user.full_name }}</p>
+                        <p class="text-xs text-gray-500">{{ user.email }}</p>
+                    </div>
+                    <a href="{{ url_for('profile') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-white/50 transition-colors">
+                        <i class="fas fa-user w-4 text-gray-400"></i> Profile
+                    </a>
+                    <a href="{{ url_for('change_password') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-white/50 transition-colors">
+                        <i class="fas fa-key w-4 text-gray-400"></i> Password
+                    </a>
+                    <hr class="my-2 border-gray-200/50">
+                    <a href="{{ url_for('logout') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50/50 transition-colors">
+                        <i class="fas fa-sign-out-alt w-4"></i> Logout
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn"
+                class="md:hidden w-10 h-10 text-gray-600 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobileMenu"
+        class="hidden md:hidden mt-2 bg-white/60 backdrop-blur-2xl rounded-2xl shadow-xl border border-white/30 py-2 px-2">
+        <a href="{{ url_for('dashboard') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-home w-5 text-center text-gray-400"></i> Dashboard
+        </a>
+        <a href="{{ url_for('transfer') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-paper-plane w-5 text-center text-gray-400"></i> Transfer
+        </a>
+        <a href="{{ url_for('deposit') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-plus w-5 text-center text-gray-400"></i> Deposit
+        </a>
+        <a href="{{ url_for('withdraw') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-wallet w-5 text-center text-gray-400"></i> Withdraw
+        </a>
+        <a href="{{ url_for('transaction_history') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-history w-5 text-center text-gray-400"></i> History
+        </a>
+        <a href="{{ url_for('beneficiaries') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/50 rounded-xl transition-colors">
+            <i class="fas fa-users w-5 text-center text-gray-400"></i> Beneficiaries
+        </a>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const userDropdownBtn = document.getElementById('userDropdownBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+
+        if (userDropdownBtn && userDropdownMenu) {
+            userDropdownBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                userDropdownMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function () {
+                userDropdownMenu.classList.add('hidden');
+            });
+        }
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        }
+    });
+</script>

@@ -1,0 +1,131 @@
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Back Button -->
+        <div class="mb-8">
+            <a href="{{ url_for('dashboard') }}"
+                class="group inline-flex items-center text-emerald-600 hover:text-emerald-700 font-bold transition-colors">
+                <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+                Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Recharge Card -->
+        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-emerald-900/5 border border-emerald-100 p-8 lg:p-10">
+            <div class="flex items-center mb-10">
+                <div
+                    class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mr-5 shadow-inner">
+                    <i class="fas fa-mobile-alt text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-black text-gray-900 tracking-tight">Signal Recharge</h1>
+                    <p class="text-gray-500 font-medium mt-1">Acquire mobile data and airtime modules</p>
+                </div>
+            </div>
+
+            <!-- Promotion Banner -->
+            <div
+                class="mb-10 p-5 bg-emerald-950 rounded-3xl border border-emerald-800/50 relative overflow-hidden group">
+                <div
+                    class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl -mr-12 -mt-12 group-hover:bg-emerald-500/20 transition-colors">
+                </div>
+                <div class="flex items-center relative z-10">
+                    <div
+                        class="w-8 h-8 bg-emerald-500 text-emerald-950 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-emerald-500/20">
+                        <i class="fas fa-bolt text-xs"></i>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-black text-emerald-400 uppercase tracking-widest">Protocol
+                            Bonus:</span>
+                        <p class="text-sm text-emerald-100 font-bold">
+                            10% Yield on all acquisitions
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <form action="{{ url_for('recharge') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                <div class="space-y-8">
+                    <!-- Phone Number -->
+                    <div class="space-y-2">
+                        <label for="card_number"
+                            class="block text-xs font-bold text-gray-500 uppercase tracking-widest pl-1">
+                            Target Node Identifier
+                        </label>
+                        <div class="relative group">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-emerald-500 transition-colors">
+                                <i class="fas fa-phone-alt text-xs"></i>
+                            </div>
+                            <input type="text" id="card_number" name="card_number"
+                                class="w-full pl-12 pr-5 py-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:bg-white focus:border-emerald-500 transition-all outline-none font-bold text-gray-900 tracking-widest"
+                                placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="space-y-2">
+                        <label for="amount"
+                            class="block text-xs font-bold text-gray-500 uppercase tracking-widest pl-1">
+                            Allocation Volume (INR)
+                        </label>
+                        <div class="relative group">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-emerald-600 font-black">
+                                ₹
+                            </div>
+                            <input type="number" id="amount" name="amount" min="10" step="10"
+                                class="w-full pl-10 pr-5 py-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-emerald-500/10 focus:bg-white focus:border-emerald-500 transition-all outline-none font-black text-gray-900 text-2xl"
+                                placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <!-- Quick Amount Buttons -->
+                    <div class="space-y-3">
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest pl-1">Preset
+                            Capacities:</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button type="button" onclick="document.getElementById('amount').value=100"
+                                class="px-4 py-4 text-xs font-black text-gray-600 bg-gray-50 border border-gray-100 rounded-xl hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all uppercase tracking-widest">₹
+                                100</button>
+                            <button type="button" onclick="document.getElementById('amount').value=200"
+                                class="px-4 py-4 text-xs font-black text-gray-600 bg-gray-50 border border-gray-100 rounded-xl hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all uppercase tracking-widest">₹
+                                200</button>
+                            <button type="button" onclick="document.getElementById('amount').value=500"
+                                class="px-4 py-4 text-xs font-black text-gray-600 bg-gray-50 border border-gray-100 rounded-xl hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all uppercase tracking-widest">₹
+                                500</button>
+                            <button type="button" onclick="document.getElementById('amount').value=1000"
+                                class="px-4 py-4 text-xs font-black text-gray-600 bg-gray-50 border border-gray-100 rounded-xl hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all uppercase tracking-widest">₹
+                                1k</button>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-6">
+                        <button type="submit"
+                            class="w-full px-8 py-5 bg-gray-900 text-white font-black rounded-2xl hover:bg-emerald-600 transition-all shadow-xl shadow-gray-900/10 transform hover:-translate-y-1 active:scale-95 uppercase tracking-widest text-sm">
+                            Authorize Injection
+                            <i class="fas fa-paper-plane ml-2 text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Security Footer -->
+        <div class="mt-8 flex items-center justify-center space-x-6">
+            <div class="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-tight">
+                <i class="fas fa-shield-alt text-emerald-500 mr-2"></i>
+                End-to-End Encrypted
+            </div>
+            <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
+            <div class="flex items-center text-[10px] font-black text-gray-400 uppercase tracking-tight">
+                <i class="fas fa-bolt text-emerald-500 mr-2"></i>
+                Instant Provisioning
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
