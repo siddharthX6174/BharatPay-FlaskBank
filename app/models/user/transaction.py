@@ -2,7 +2,6 @@ from app import db
 from sqlalchemy import Numeric
 from datetime import datetime
 
-
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     
